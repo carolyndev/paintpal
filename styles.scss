@@ -76,6 +76,7 @@ main {
 .user-button {
   margin-bottom: 0.5rem;
 }
+
 .user-input {
   display: flex;
   justify-content: center;
@@ -96,7 +97,8 @@ main {
 
 .pen-button,
 .brush-size-button,
-.eraser-button {
+.eraser-button,
+.stencil-button {
   svg {
     pointer-events: none;
   }
@@ -105,7 +107,7 @@ main {
 .brush-size-menu {
   position: absolute;
   top: 50%;
-  left: 200%;
+  left: calc(100% + 1rem);
   transform: translateY(-50%);
   display: none;
   justify-content: center;
@@ -125,8 +127,36 @@ main {
   width: 100px;
   height: 26px;
   margin: 0;
+  cursor: pointer;
+  &:focus-visible {
+    outline: 0px transparent solid;
+  }
+}
+.stencil-div {
+  position: relative;
 }
 
+.stencil-menu {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 1rem);
+  display: none;
+  pointer-events: none;
+
+  &.open {
+    display: flex;
+    pointer-events: all;
+  }
+}
+
+#stencil-select {
+  width: auto;
+  height: 26px;
+  border: 1px solid $gray;
+  border-radius: $rounded;
+}
+
+// canvas
 .canvas-container {
   display: flex;
   flex-direction: column;
@@ -135,11 +165,10 @@ main {
   width: 80vw;
   cursor: crosshair;
 }
+
 #cursor {
   position: absolute;
   content: '';
-  // width: 20px;
-  // height: 20px;
   border: 1px solid $black;
   border-radius: 50%;
   pointer-events: none;
@@ -149,15 +178,6 @@ main {
   border: 1px solid $gray;
   border-radius: 2px;
   background-color: #ffffff;
-}
-
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-
-  p {
-    margin: 0 auto 0.5rem;
-    text-align: center;
-  }
+  background-image: url(./pages/spirals.jpeg);
+  background-repeat: no-repeat;
 }

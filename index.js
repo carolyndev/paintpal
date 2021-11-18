@@ -18,45 +18,43 @@ window.addEventListener('resize', resizeCanvas);
 
 // user settings
 // indicate active tool
-const userButtons = document.querySelectorAll('.user-settings-inner a');
+const userButtons = document.querySelectorAll('.user-input');
 const setActive = (e) => {
   userButtons.forEach((button) => {
     button.classList.remove('active');
   });
-
   e.target.classList.add('active');
 };
 userButtons.forEach((button) => {
   button.addEventListener('click', setActive);
+  button.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    setActive(e);
+  });
 });
 
-// set color
-const brushColorBtn = document.querySelector('#brush-color');
-let brushColor = brushColorBtn.value;
-const setBrushColor = (e) => {
-  brushColor = e.target.value;
-  penBtn.classList.add('active');
-  eraserBtn.classList.remove('active');
-};
-brushColorBtn.addEventListener('change', setBrushColor);
-
-// pen active
+// set pen active
 const penBtn = document.querySelector('.pen-button');
-
 const setPenActive = () => {
   brushColor = brushColorBtn.value;
 };
 penBtn.addEventListener('click', setPenActive);
+penBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  setPenActive(e);
+});
 
-// eraser
-
+// set eraser active
 const eraserBtn = document.querySelector('.eraser-button');
 eraserBtn.addEventListener('click', () => {
   brushColor = '#FFFFFF';
-  console.log(brushColor);
+});
+eraserBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  brushColor = '#FFFFFF';
 });
 
-// size
+// set brush size
 const brushSizeBtn = document.querySelector('.brush-size-button');
 const brushSizeSlider = document.querySelector('#brush-size');
 const sliderDiv = document.querySelector('.brush-size-menu');
@@ -65,12 +63,19 @@ let brushSize = 10;
 const setBrushSize = (e) => {
   brushSize = e.target.value;
 };
-const toggleSizeSlider = () => {
+const toggleSizeSlider = (e) => {
   if (sliderDiv.classList.contains('open')) {
-    brushSizeBtn.classList.remove('active');
+    // brushSizeBtn.classList.remove('active');
     sliderDiv.classList.remove('open');
+
+    if (brushColor === '#FFFFFF') {
+      eraserBtn.classList.add('active');
+    } else {
+      penBtn.classList.add('active');
+    }
   } else {
     sliderDiv.classList.add('open');
+    brushSizeSlider.focus();
   }
 };
 const closeSizeSlider = () => {
@@ -84,11 +89,61 @@ const closeSizeSlider = () => {
   }
 };
 
+brushSizeBtn.addEventListener('click', toggleSizeSlider);
+brushSizeBtn.addEventListener('keypress', (e) => {
+  if (e.key !== 'Enter') return;
+  toggleSizeSlider(e);
+});
 brushSizeSlider.addEventListener('change', setBrushSize);
 brushSizeSlider.addEventListener('blur', closeSizeSlider);
-brushSizeBtn.addEventListener('click', toggleSizeSlider);
 
-//
+// set color
+const brushColorBtn = document.querySelector('#brush-color');
+let brushColor = brushColorBtn.value;
+const setBrushColor = (e) => {
+  brushColor = e.target.value;
+  penBtn.classList.add('active');
+  eraserBtn.classList.remove('active');
+};
+brushColorBtn.addEventListener('input', setBrushColor);
+
+// set stencil
+const stencilBtn = document.querySelector('.stencil-button');
+const stencilMenu = document.querySelector('.stencil-menu');
+const stencilSelect = document.querySelector('#stencil-select');
+
+const toggleStencilSelect = (e) => {
+  if (stencilMenu.classList.contains('open')) {
+    stencilMenu.classList.remove('open');
+
+    if (brushColor === '#FFFFFF') {
+      eraserBtn.classList.add('active');
+    } else {
+      penBtn.classList.add('active');
+    }
+  } else {
+    stencilMenu.classList.add('open');
+    stencilSelect.focus();
+  }
+};
+
+const closeStencilSelect = (e) => {
+  stencilMenu.classList.remove('open');
+  stencilBtn.classList.remove('active');
+
+  if (brushColor === '#FFFFFF') {
+    eraserBtn.classList.add('active');
+  } else {
+    penBtn.classList.add('active');
+  }
+};
+
+stencilBtn.addEventListener('click', toggleStencilSelect);
+stencilBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  toggleStencilSelect(e);
+});
+stencilSelect.addEventListener('blur', closeStencilSelect);
 
 // painting events
 
@@ -127,7 +182,7 @@ canvas.addEventListener('mousedown', startStroke);
 canvas.addEventListener('mousemove', extendStroke);
 canvas.addEventListener('mouseup', endStroke);
 
-// cursor
+// canvas cursor
 const cursor = document.querySelector('#cursor');
 
 const setMousePos = (e) => {

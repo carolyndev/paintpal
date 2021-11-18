@@ -115,14 +115,15 @@ main {
 
 .pen-button svg,
 .brush-size-button svg,
-.eraser-button svg {
+.eraser-button svg,
+.stencil-button svg {
   pointer-events: none;
 }
 
 .brush-size-menu {
   position: absolute;
   top: 50%;
-  left: 200%;
+  left: calc(100% + 1rem);
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   display: none;
@@ -147,6 +148,37 @@ main {
   width: 100px;
   height: 26px;
   margin: 0;
+  cursor: pointer;
+}
+
+#brush-size:focus-visible {
+  outline: 0px transparent solid;
+}
+
+.stencil-div {
+  position: relative;
+}
+
+.stencil-menu {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 1rem);
+  display: none;
+  pointer-events: none;
+}
+
+.stencil-menu.open {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  pointer-events: all;
+}
+
+#stencil-select {
+  width: auto;
+  height: 26px;
+  border: 1px solid #b2b2b2;
+  border-radius: 0.25rem;
 }
 
 .canvas-container {
@@ -179,16 +211,7 @@ main {
   border: 1px solid #b2b2b2;
   border-radius: 2px;
   background-color: #ffffff;
-}
-
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
-
-footer p {
-  margin: 0 auto 0.5rem;
-  text-align: center;
+  background-image: url(./pages/spirals.jpeg);
+  background-repeat: no-repeat;
 }
 /*# sourceMappingURL=styles.css.map */
