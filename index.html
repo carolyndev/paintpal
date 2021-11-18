@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <title>PaintPal</title>
+  </head>
+  <body>
+    <header>
+      <h1>PaintPal</h1>
+    </header>
+    <main>
+      <div class="user-settings">
+        <div class="user-settings-inner">
+          <div class="user-button">
+            <a class="user-input pen-button active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+          </div>
+          <div class="user-button eraser-menu">
+            <a class="user-input eraser-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-eraser"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+          </div>
+
+          <div class="user-button brush-size-div">
+            <a class="user-input brush-size-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
+
+            <div class="brush-size-menu">
+              <input
+                type="range"
+                id="brush-size"
+                class="user-input"
+                min="1"
+                max="101"
+                step="2"
+                value="10"
+              />
+            </div>
+          </div>
+
+          <div class="user-button user-color">
+            <input type="color" id="brush-color" class="user-input" />
+          </div>
+        </div>
+      </div>
+
+      <div class="canvas-container">
+        <div id="cursor">
+          <div id="cursor-inner"></div>
+        </div>
+
+        <canvas id="canvas"></canvas>
+      </div>
+    </main>
+
+    <footer>
+      <p>2021 Carolyn Lau</p>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
