@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap");
 *,
 *::before,
 *::after {
@@ -12,9 +12,9 @@ html {
 
 body {
   position: relative;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   font-size: 1rem;
-  height: 100vh;
+  min-height: 100vh;
   color: #222222;
 }
 
@@ -28,12 +28,24 @@ p {
 }
 
 header {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+header a {
+  text-decoration: none;
 }
 
 header h1 {
-  padding-top: 0.5rem;
-  text-align: center;
+  margin-left: 9vw;
+  padding-top: 1rem;
+  text-align: left;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+header h1 span img {
+  width: 1.625rem;
+  height: 1.625rem;
 }
 
 main {
@@ -46,6 +58,7 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 80vh;
 }
 
 .active {
@@ -64,7 +77,7 @@ main {
           align-items: center;
   height: calc(80vh + 0.0625rem);
   border: 0.0625rem solid #b2b2b2;
-  border-radius: 0.125rem;
+  border-radius: 0.25rem;
   border-right: none;
   cursor: default;
 }
@@ -99,9 +112,9 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid #b2b2b2;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 0.0625rem solid #b2b2b2;
   border-radius: 0.25rem;
 }
 
@@ -116,7 +129,9 @@ main {
 .pen-button svg,
 .brush-size-button svg,
 .eraser-button svg,
-.stencil-button svg {
+.stencil-button svg,
+.magnify-button svg,
+.minify-button svg {
   pointer-events: none;
 }
 
@@ -131,7 +146,7 @@ main {
       -ms-flex-pack: center;
           justify-content: center;
   pointer-events: none;
-  border: 1px solid #b2b2b2;
+  border: 0.0625rem solid #b2b2b2;
   border-radius: 0.25rem;
   background-color: #fafafa;
 }
@@ -145,21 +160,19 @@ main {
 
 #brush-size {
   right: 0;
-  width: 100px;
-  height: 26px;
+  width: 6.25rem;
+  height: 1.625rem;
   margin: 0;
   cursor: pointer;
 }
 
-#brush-size:focus-visible {
-  outline: 0px transparent solid;
-}
-
-.stencil-div {
+.stencil-div,
+.pattern-div {
   position: relative;
 }
 
-.stencil-menu {
+.stencil-menu,
+.pattern-menu {
   position: absolute;
   top: 0;
   left: calc(100% + 1rem);
@@ -167,18 +180,29 @@ main {
   pointer-events: none;
 }
 
-.stencil-menu.open {
+.stencil-menu.open,
+.pattern-menu.open {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   pointer-events: all;
 }
 
-#stencil-select {
+#stencil-select,
+#pattern-select {
   width: auto;
-  height: 26px;
-  border: 1px solid #b2b2b2;
+  height: 1.625rem;
+  border: 0.0625rem solid #b2b2b2;
   border-radius: 0.25rem;
+}
+
+#pattern-star {
+  pointer-events: none;
+}
+
+.pattern-icons {
+  display: none;
+  pointer-events: none;
 }
 
 .canvas-container {
@@ -195,23 +219,22 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 80vw;
   cursor: crosshair;
 }
 
 #cursor {
   position: absolute;
   content: '';
-  border: 1px solid #222222;
+  border: 0.0625rem solid #222222;
   border-radius: 50%;
   pointer-events: none;
 }
 
 #canvas {
-  border: 1px solid #b2b2b2;
-  border-radius: 2px;
+  border: 0.0625rem solid #b2b2b2;
+  border-radius: 0.125rem 0.25rem 0.25rem 0.125rem;
   background-color: #ffffff;
-  background-image: url(./pages/spirals.jpeg);
+  background-image: none;
   background-repeat: no-repeat;
 }
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=app.css.map */

@@ -5,6 +5,7 @@ var inMemContext = inMemCanvas.getContext('2d');
 
 // set canvas size
 const resizeCanvas = () => {
+  // redraws on resize
   inMemCanvas.width = canvas.width;
   inMemCanvas.height = canvas.height;
   inMemContext.drawImage(canvas, 0, 0);
@@ -32,6 +33,17 @@ userButtons.forEach((button) => {
     setActive(e);
   });
 });
+
+// return to most recent tool
+const returnToTool = () => {
+  if (typeof brushColor !== 'string') {
+    patternBtn.classList.add('active');
+  } else if (brushColor === '#FFFFFF') {
+    eraserBtn.classList.add('active');
+  } else {
+    penBtn.classList.add('active');
+  }
+};
 
 // set pen active
 const penBtn = document.querySelector('.pen-button');
@@ -65,14 +77,7 @@ const setBrushSize = (e) => {
 };
 const toggleSizeSlider = (e) => {
   if (sliderDiv.classList.contains('open')) {
-    // brushSizeBtn.classList.remove('active');
-    sliderDiv.classList.remove('open');
-
-    if (brushColor === '#FFFFFF') {
-      eraserBtn.classList.add('active');
-    } else {
-      penBtn.classList.add('active');
-    }
+    closeSizeSlider(e);
   } else {
     sliderDiv.classList.add('open');
     brushSizeSlider.focus();
@@ -81,12 +86,7 @@ const toggleSizeSlider = (e) => {
 const closeSizeSlider = () => {
   sliderDiv.classList.remove('open');
   brushSizeBtn.classList.remove('active');
-
-  if (brushColor === '#FFFFFF') {
-    eraserBtn.classList.add('active');
-  } else {
-    penBtn.classList.add('active');
-  }
+  returnToTool();
 };
 
 brushSizeBtn.addEventListener('click', toggleSizeSlider);
@@ -114,13 +114,7 @@ const stencilSelect = document.querySelector('#stencil-select');
 
 const toggleStencilSelect = (e) => {
   if (stencilMenu.classList.contains('open')) {
-    stencilMenu.classList.remove('open');
-
-    if (brushColor === '#FFFFFF') {
-      eraserBtn.classList.add('active');
-    } else {
-      penBtn.classList.add('active');
-    }
+    closeStencilSelect();
   } else {
     stencilMenu.classList.add('open');
     stencilSelect.focus();
@@ -130,12 +124,17 @@ const toggleStencilSelect = (e) => {
 const closeStencilSelect = (e) => {
   stencilMenu.classList.remove('open');
   stencilBtn.classList.remove('active');
+  returnToTool();
+};
 
-  if (brushColor === '#FFFFFF') {
-    eraserBtn.classList.add('active');
+const setStencil = (e) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (e.target.value === 'blank') {
+    canvas.style.backgroundImage = 'none';
   } else {
-    penBtn.classList.add('active');
+    canvas.style.backgroundImage = `url(./images/${e.target.value}.jpeg`;
   }
+  closeStencilSelect(e);
 };
 
 stencilBtn.addEventListener('click', toggleStencilSelect);
@@ -144,9 +143,56 @@ stencilBtn.addEventListener('keydown', (e) => {
   toggleStencilSelect(e);
 });
 stencilSelect.addEventListener('blur', closeStencilSelect);
+stencilSelect.addEventListener('change', setStencil);
+
+// set brush pattern
+const paintbrushIcon = document.querySelector('#paintbrush-icon');
+const paintbrush = ctx.createPattern(paintbrushIcon, 'repeat');
+const starIcon = document.querySelector('#star-icon');
+const star = ctx.createPattern(starIcon, 'repeat');
+const fireIcon = document.querySelector('#fire-icon');
+const fire = ctx.createPattern(fireIcon, 'repeat');
+const cloverIcon = document.querySelector('#clover-icon');
+const clover = ctx.createPattern(cloverIcon, 'repeat');
+
+const patternBtn = document.querySelector('.pattern-button');
+const patternMenu = document.querySelector('.pattern-menu');
+const patternSelect = document.querySelector('#pattern-select');
+
+const togglePatternMenu = (e) => {
+  if (patternMenu.classList.contains('open')) {
+    closePatternSelect();
+  } else {
+    patternMenu.classList.add('open');
+    patternSelect.focus();
+  }
+};
+
+const closePatternSelect = (e) => {
+  patternMenu.classList.remove('open');
+  patternBtn.classList.remove('active');
+  returnToTool();
+};
+
+const setPattern = (e) => {
+  if (e.target.value === 'none') {
+    brushColor = brushColorBtn.value;
+  } else {
+    patternChoice = e.target.value;
+    brushColor = eval(patternChoice);
+  }
+  closePatternSelect(e);
+};
+
+patternBtn.addEventListener('click', togglePatternMenu);
+patternBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  togglePatternMenu(e);
+});
+patternSelect.addEventListener('change', setPattern);
+patternSelect.addEventListener('blur', closePatternSelect);
 
 // painting events
-
 const getMousePos = (e) => {
   var rect = canvas.getBoundingClientRect();
   return {
@@ -164,11 +210,10 @@ const endStroke = () => {
   paint = false;
   ctx.beginPath();
 };
+
 const extendStroke = (e) => {
   var mouse = getMousePos(e);
-
   if (paint == false) return;
-
   ctx.lineWidth = brushSize;
   ctx.lineCap = 'round';
   ctx.strokeStyle = brushColor;
@@ -193,9 +238,13 @@ const setMousePos = (e) => {
 };
 
 canvas.addEventListener('mousemove', setMousePos);
+
+// cursor leaves canvas
 canvas.addEventListener('mouseout', () => {
   cursor.style.opacity = 0;
-  paint = false;
+  window.addEventListener('mouseup', () => {
+    paint = false;
+  });
   ctx.beginPath();
 });
 canvas.addEventListener('mouseover', () => {
