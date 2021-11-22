@@ -37,11 +37,14 @@ p {
 header {
   margin-bottom: 1rem;
 
-  a {
+  a,
+  a:visited {
     text-decoration: none;
+    color: $black;
   }
 
   h1 {
+    display: inline-block;
     margin-left: 9vw;
     padding-top: 1rem;
     text-align: left;
