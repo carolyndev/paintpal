@@ -51,11 +51,12 @@ body {
   font-family: 'Comfortaa', sans-serif;
   font-size: 1rem;
   color: $black;
+  max-width: 250rem;
 
   &::before {
     z-index: -1;
     content: '';
-    height: 200vh;
+    height: 150vh;
     width: 150vw;
     position: absolute;
     top: 0;
@@ -96,6 +97,7 @@ header {
 
 .hero {
   width: 90vw;
+  max-width: 250rem;
   margin: 0 auto 4rem;
 }
 
@@ -103,7 +105,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 0 auto;
+  margin: 5vh auto;
   padding: 1rem;
   background-color: rgba(250, 250, 250, 0.8);
   border-radius: 0.75rem 2rem;
@@ -298,7 +300,6 @@ header {
   }
 
   .hero-card {
-    margin: 5vh auto;
     padding: 6rem 2rem 8rem;
     flex-direction: row;
   }

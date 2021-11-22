@@ -31,11 +31,14 @@ header {
   margin-bottom: 1rem;
 }
 
-header a {
+header a,
+header a:visited {
   text-decoration: none;
+  color: #222222;
 }
 
 header h1 {
+  display: inline-block;
   margin-left: 9vw;
   padding-top: 1rem;
   text-align: left;
