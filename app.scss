@@ -89,11 +89,13 @@ main {
     margin: 0 0.5rem;
   }
 }
+
 .user-button {
   margin-bottom: 0.5rem;
 }
 
 .user-input {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,6 +106,57 @@ main {
 
   &:hover {
     cursor: pointer;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 1rem);
+    width: inherit;
+    height: inherit;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.pen-button::after {
+    content: 'pen';
+  }
+  &.eraser-button::after {
+    content: 'eraser';
+  }
+  &.brush-size-button::after {
+    content: 'brush size';
+  }
+  &#brush-color::after {
+    content: 'brush color';
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1rem;
+  }
+  &.stencil-button::after {
+    content: 'coloring page';
+  }
+  &.pattern-button {
+    &::after {
+      content: 'brush pattern';
+    }
+  }
+  &.reset-button {
+    &::after {
+      content: 'clear canvas';
+    }
+  }
+
+  &.active {
+    &::after {
+      opacity: 0;
+    }
   }
 }
 
@@ -115,8 +168,7 @@ main {
 .brush-size-button,
 .eraser-button,
 .stencil-button,
-.magnify-button,
-.minify-button {
+.reset-button {
   svg {
     pointer-events: none;
   }
@@ -180,7 +232,9 @@ main {
 
 .pattern-icons {
   display: none;
+  position: absolute;
   pointer-events: none;
+  top: -100%;
 }
 
 // canvas settings

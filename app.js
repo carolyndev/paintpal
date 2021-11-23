@@ -25,6 +25,9 @@ const setActive = (e) => {
     button.classList.remove('active');
   });
   e.target.classList.add('active');
+  if (e.target.classList.contains('reset-button')) {
+    setTimeout(returnToTool, 100);
+  }
 };
 userButtons.forEach((button) => {
   button.addEventListener('click', setActive);
@@ -191,6 +194,19 @@ patternBtn.addEventListener('keydown', (e) => {
 });
 patternSelect.addEventListener('change', setPattern);
 patternSelect.addEventListener('blur', closePatternSelect);
+
+// reset canvas
+const resetBtn = document.querySelector('.reset-button');
+
+const clearCanvas = (e) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
+resetBtn.addEventListener('click', clearCanvas);
+resetBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  clearCanvas(e);
+});
 
 // painting events
 const getMousePos = (e) => {
