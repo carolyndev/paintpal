@@ -26,7 +26,10 @@ const setActive = (e) => {
   });
   e.target.classList.add('active');
   if (e.target.classList.contains('reset-button')) {
-    setTimeout(returnToTool, 100);
+    setTimeout(() => {
+      e.target.classList.remove('active');
+      returnToTool();
+    }, 100);
   }
 };
 userButtons.forEach((button) => {
@@ -52,6 +55,7 @@ const returnToTool = () => {
 const penBtn = document.querySelector('.pen-button');
 const setPenActive = () => {
   brushColor = brushColorBtn.value;
+  patternSelect.value = 'none';
 };
 penBtn.addEventListener('click', setPenActive);
 penBtn.addEventListener('keydown', (e) => {
@@ -110,6 +114,54 @@ const setBrushColor = (e) => {
 };
 brushColorBtn.addEventListener('input', setBrushColor);
 
+// set brush pattern
+// patterns
+const paintbrushIcon = document.querySelector('#paintbrush-icon');
+const paintbrush = ctx.createPattern(paintbrushIcon, 'repeat');
+const starIcon = document.querySelector('#star-icon');
+const star = ctx.createPattern(starIcon, 'repeat');
+const fireIcon = document.querySelector('#fire-icon');
+const fire = ctx.createPattern(fireIcon, 'repeat');
+const cloverIcon = document.querySelector('#clover-icon');
+const clover = ctx.createPattern(cloverIcon, 'repeat');
+// menu parts
+const patternBtn = document.querySelector('.pattern-button');
+const patternMenu = document.querySelector('.pattern-menu');
+const patternSelect = document.querySelector('#pattern-select');
+
+const togglePatternMenu = (e) => {
+  if (patternMenu.classList.contains('open')) {
+    closePatternSelect();
+  } else {
+    patternMenu.classList.add('open');
+    patternSelect.focus();
+  }
+};
+
+const closePatternSelect = (e) => {
+  patternMenu.classList.remove('open');
+  patternBtn.classList.remove('active');
+  returnToTool();
+};
+
+const setPattern = (e) => {
+  if (e.target.value === 'none') {
+    brushColor = brushColorBtn.value;
+  } else {
+    patternChoice = e.target.value;
+    brushColor = eval(patternChoice);
+  }
+  closePatternSelect(e);
+};
+
+patternBtn.addEventListener('click', togglePatternMenu);
+patternBtn.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  togglePatternMenu(e);
+});
+patternSelect.addEventListener('change', setPattern);
+patternSelect.addEventListener('blur', closePatternSelect);
+
 // set stencil
 const stencilBtn = document.querySelector('.stencil-button');
 const stencilMenu = document.querySelector('.stencil-menu');
@@ -148,58 +200,13 @@ stencilBtn.addEventListener('keydown', (e) => {
 stencilSelect.addEventListener('blur', closeStencilSelect);
 stencilSelect.addEventListener('change', setStencil);
 
-// set brush pattern
-const paintbrushIcon = document.querySelector('#paintbrush-icon');
-const paintbrush = ctx.createPattern(paintbrushIcon, 'repeat');
-const starIcon = document.querySelector('#star-icon');
-const star = ctx.createPattern(starIcon, 'repeat');
-const fireIcon = document.querySelector('#fire-icon');
-const fire = ctx.createPattern(fireIcon, 'repeat');
-const cloverIcon = document.querySelector('#clover-icon');
-const clover = ctx.createPattern(cloverIcon, 'repeat');
-
-const patternBtn = document.querySelector('.pattern-button');
-const patternMenu = document.querySelector('.pattern-menu');
-const patternSelect = document.querySelector('#pattern-select');
-
-const togglePatternMenu = (e) => {
-  if (patternMenu.classList.contains('open')) {
-    closePatternSelect();
-  } else {
-    patternMenu.classList.add('open');
-    patternSelect.focus();
-  }
-};
-
-const closePatternSelect = (e) => {
-  patternMenu.classList.remove('open');
-  patternBtn.classList.remove('active');
-  returnToTool();
-};
-
-const setPattern = (e) => {
-  if (e.target.value === 'none') {
-    brushColor = brushColorBtn.value;
-  } else {
-    patternChoice = e.target.value;
-    brushColor = eval(patternChoice);
-  }
-  closePatternSelect(e);
-};
-
-patternBtn.addEventListener('click', togglePatternMenu);
-patternBtn.addEventListener('keydown', (e) => {
-  if (e.key !== 'Enter') return;
-  togglePatternMenu(e);
-});
-patternSelect.addEventListener('change', setPattern);
-patternSelect.addEventListener('blur', closePatternSelect);
-
 // reset canvas
 const resetBtn = document.querySelector('.reset-button');
 
 const clearCanvas = (e) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stencilSelect.value = 'blank';
+  canvas.style.backgroundImage = 'none';
 };
 
 resetBtn.addEventListener('click', clearCanvas);
