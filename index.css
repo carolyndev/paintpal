@@ -241,6 +241,7 @@ header .cta-button {
 
 .intro-desc {
   margin-bottom: 1rem;
+  line-height: 1.7;
 }
 
 .intro-image img {
@@ -388,7 +389,7 @@ header .cta-button {
             flex-direction: row-reverse;
   }
   .intro-text {
-    width: 40%;
+    width: 50%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
