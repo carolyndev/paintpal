@@ -16,6 +16,7 @@ body {
   font-size: 1rem;
   min-height: 100vh;
   color: #222222;
+  overflow-x: hidden;
 }
 
 body,
@@ -27,10 +28,6 @@ p {
   margin: 0;
 }
 
-header {
-  margin-bottom: 1rem;
-}
-
 header a,
 header a:visited {
   text-decoration: none;
@@ -38,6 +35,7 @@ header a:visited {
 }
 
 header h1 {
+  position: relative;
   display: inline-block;
   margin-left: 9vw;
   padding-top: 1rem;
@@ -47,8 +45,38 @@ header h1 {
 }
 
 header h1 span img {
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+header h1::before, header h1::after {
+  pointer-events: none;
+}
+
+header h1::before {
+  content: '';
+  position: absolute;
+  background-color: #82a1fb;
+  width: 20vw;
+  height: 50%;
+  top: 50%;
+  right: calc(100% + 1rem);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  border-radius: 0 3.125rem 3.125rem 0;
+}
+
+header h1::after {
+  content: '';
+  position: absolute;
+  background-color: #82a1fb;
+  top: 50%;
+  left: calc(100% + 1rem);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 100vw;
+  height: 50%;
+  border-radius: 3.125rem 0 0 3.125rem;
 }
 
 main {
@@ -62,6 +90,7 @@ main {
       -ms-flex-align: center;
           align-items: center;
   height: 80vh;
+  margin-top: 2rem;
 }
 
 .active {
@@ -175,10 +204,10 @@ main {
 }
 
 .user-input.reset-button::after {
-  content: 'clear canvas';
+  content: 'delete all';
 }
 
-.user-input.active::after {
+.user-input.brush-size-button.active::after, .user-input#brush-color.active::after, .user-input.pattern-button.active::after, .user-input.stencil-button.active::after {
   opacity: 0;
 }
 
@@ -204,10 +233,11 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  pointer-events: none;
+  padding: 0 1rem 1rem;
   border: 0.0625rem solid #b2b2b2;
   border-radius: 0.25rem;
   background-color: #fafafa;
+  pointer-events: none;
 }
 
 .brush-size-menu.open {
@@ -215,6 +245,22 @@ main {
   display: -ms-flexbox;
   display: flex;
   pointer-events: all;
+}
+
+.brush-size-menu::before, .brush-size-menu::after {
+  position: absolute;
+  top: 50%;
+  font-size: 0.875rem;
+}
+
+.brush-size-menu::before {
+  content: '1px';
+  left: 0.5rem;
+}
+
+.brush-size-menu::after {
+  content: '100px';
+  right: 0.5rem;
 }
 
 #brush-size {

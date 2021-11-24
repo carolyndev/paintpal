@@ -79,8 +79,8 @@ header h1 {
 }
 
 header h1 span img {
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 header a {
@@ -264,7 +264,7 @@ header .cta-button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 
 .footer-cta p {
@@ -274,7 +274,7 @@ header .cta-button {
 .meet {
   background-color: #82a1fb;
   color: #fafafa;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .meet h2 {
@@ -286,12 +286,28 @@ header .cta-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-align: center;
+}
+
+.meet-photo {
+  margin-bottom: 1rem;
+}
+
+.meet-photo img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid #fafafa;
 }
 
 .meet-desc {
@@ -302,7 +318,9 @@ header .cta-button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 45%;
+  width: 80%;
+  max-width: 280px;
+  margin-bottom: 1rem;
 }
 
 .meet-desc h3 {
@@ -314,11 +332,40 @@ header .cta-button {
 }
 
 .meet-links a {
+  position: relative;
   color: #fafafa;
 }
 
 .meet-links a:not(:last-of-type) {
   margin-right: 1rem;
+}
+
+.meet-links a:first-of-type::after {
+  content: 'Github';
+}
+
+.meet-links a:nth-of-type(2)::after {
+  content: 'LinkedIn';
+}
+
+.meet-links a:last-of-type::after {
+  content: 'Portfolio';
+}
+
+.meet-links a::after {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-transition: opacity 300ms ease;
+  transition: opacity 300ms ease;
+  font-size: 0.875rem;
+}
+
+.meet-links a:hover::after {
+  opacity: 1;
 }
 
 .meet-links svg {
@@ -411,9 +458,24 @@ header .cta-button {
     margin: 0 2rem 0 0;
   }
   .meet-content {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .meet-photo,
+  .meet-desc {
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+  .meet-desc {
+    text-align: left;
   }
 }
 /*# sourceMappingURL=index.css.map */
