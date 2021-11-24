@@ -21,7 +21,7 @@ Live site URL: [[PaintPal]](https://paintpal.netlify.app/)
 
 ## Set-up
 
-1. Clone this repository to your desktop. [PaintPal](https://github.com/the-cl/paintpal 'PaintPal')
+1. Clone this repository to your desktop. [https://github.com/the-cl/paintpal](https://github.com/the-cl/paintpal)
 2. Navigate to the top level of the directory.
 3. Open the index.html file in your web browser.
 
