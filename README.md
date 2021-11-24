@@ -28,3 +28,5 @@ Live site URL: [[PaintPal]](https://paintpal.netlify.app/)
 ### Designed and built by Carolyn Lau
 
 - [Github](https://github.com/the-cl)
+- [LinkedIn](https://www.linkedin.com/in/carolynlau-profile/)
+- [Portfolio](https://carolyndev.com/)

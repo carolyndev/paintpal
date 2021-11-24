@@ -23,6 +23,7 @@ body {
   font-size: 1rem;
   min-height: 100vh;
   color: $black;
+  overflow-x: hidden;
 }
 
 body,
@@ -35,8 +36,6 @@ p {
 }
 
 header {
-  margin-bottom: 1rem;
-
   a,
   a:visited {
     text-decoration: none;
@@ -44,6 +43,7 @@ header {
   }
 
   h1 {
+    position: relative;
     display: inline-block;
     margin-left: 9vw;
     padding-top: 1rem;
@@ -52,8 +52,34 @@ header {
     font-weight: 600;
 
     span img {
-      width: 1.625rem;
-      height: 1.625rem;
+      width: 2rem;
+      height: 2rem;
+    }
+    &::before,
+    &::after {
+      pointer-events: none;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      background-color: #82a1fb;
+      width: 20vw;
+      height: 50%;
+      top: 50%;
+      right: calc(100% + 1rem);
+      transform: translateY(-50%);
+      border-radius: 0 3.125rem 3.125rem 0;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: #82a1fb;
+      top: 50%;
+      left: calc(100% + 1rem);
+      transform: translateY(-50%);
+      width: 100vw;
+      height: 50%;
+      border-radius: 3.125rem 0 0 3.125rem;
     }
   }
 }
@@ -63,6 +89,7 @@ main {
   justify-content: center;
   align-items: center;
   height: 80vh;
+  margin-top: 2rem;
 }
 
 .active {
@@ -149,13 +176,18 @@ main {
   }
   &.reset-button {
     &::after {
-      content: 'clear canvas';
+      content: 'delete all';
     }
   }
 
-  &.active {
-    &::after {
-      opacity: 0;
+  &.brush-size-button,
+  &#brush-color,
+  &.pattern-button,
+  &.stencil-button {
+    &.active {
+      &::after {
+        opacity: 0;
+      }
     }
   }
 }
@@ -181,14 +213,32 @@ main {
   transform: translateY(-50%);
   display: none;
   justify-content: center;
-  pointer-events: none;
+  padding: 0 1rem 1rem;
   border: 0.0625rem solid $gray;
   border-radius: $rounded;
   background-color: $white;
+  pointer-events: none;
 
   &.open {
     display: flex;
     pointer-events: all;
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 50%;
+    font-size: 0.875rem;
+  }
+
+  &::before {
+    content: '1px';
+    left: 0.5rem;
+  }
+
+  &::after {
+    content: '100px';
+    right: 0.5rem;
   }
 }
 
