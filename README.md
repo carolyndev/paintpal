@@ -6,7 +6,7 @@ Paintpal is a front-end painting web app. Users can drag their mouse across the 
 
 #### View Live Site
 
-Live site URL: [[PaintPal]](https://paintpal.netlify.app/)
+Live site URL: [[paintpal.netlify.app]](https://paintpal.netlify.app/)
 
 ### Screenshots
 
@@ -21,12 +21,12 @@ Live site URL: [[PaintPal]](https://paintpal.netlify.app/)
 
 ## Set-up
 
-1. Clone this repository to your desktop. [https://github.com/the-cl/paintpal](https://github.com/the-cl/paintpal)
+1. Clone this repository to your desktop. [https://github.com/carolyndev/paintpal](https://github.com/carolyndev/paintpal)
 2. Navigate to the top level of the directory.
 3. Open the index.html file in your web browser.
 
 ### Designed and built by Carolyn Lau
 
-- [Github](https://github.com/the-cl)
+- [GitHub](https://github.com/carolyndev)
 - [LinkedIn](https://www.linkedin.com/in/carolynlau-profile/)
 - [Portfolio](https://carolyndev.com/)
