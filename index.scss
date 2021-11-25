@@ -293,7 +293,11 @@ header {
     }
 
     &:first-of-type::after {
+<<<<<<< HEAD
       content: 'GitHub';
+=======
+      content: 'Github';
+>>>>>>> a66ac9d13ea3589eadf3a60105e105d4347258cc
     }
     &:nth-of-type(2)::after {
       content: 'LinkedIn';

@@ -341,7 +341,7 @@ header .cta-button {
 }
 
 .meet-links a:first-of-type::after {
-  content: 'Github';
+  content: 'GitHub';
 }
 
 .meet-links a:nth-of-type(2)::after {
