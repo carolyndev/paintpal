@@ -341,15 +341,15 @@ header .cta-button {
 }
 
 .meet-links a:first-of-type::after {
-  content: 'GitHub';
+  content: 'Portfolio';
 }
 
 .meet-links a:nth-of-type(2)::after {
-  content: 'LinkedIn';
+  content: 'GitHub';
 }
 
 .meet-links a:last-of-type::after {
-  content: 'Portfolio';
+  content: 'LinkedIn';
 }
 
 .meet-links a::after {

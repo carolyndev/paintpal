@@ -293,13 +293,13 @@ header {
     }
 
     &:first-of-type::after {
-      content: 'GitHub';
+      content: 'Portfolio';
     }
     &:nth-of-type(2)::after {
-      content: 'LinkedIn';
+      content: 'GitHub';
     }
     &:last-of-type::after {
-      content: 'Portfolio';
+      content: 'LinkedIn';
     }
 
     &::after {
